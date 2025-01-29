@@ -1,0 +1,19 @@
+services:
+  nginx:
+    networks:
+      - inception-network
+    ports:
+      - "443:443"
+  mariadb:
+    networks:
+      - inception-network
+    volumes:
+      - /home/pmelo-ca/data:/var/mariadb
+  wordpress:
+    networks:
+      - inception-network
+    volumes:
+      - /home/pmelo-ca/data:/var/wordpress
+
+networks:
+  - inception-network
