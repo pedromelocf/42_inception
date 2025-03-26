@@ -1,19 +1,28 @@
 services:
   nginx:
+    build: ./nginx
     networks:
       - inception-network
     ports:
       - "443:443"
+    restart: unless-stopped
   mariadb:
+    build: ./mariadb
     networks:
       - inception-network
     volumes:
       - /home/pmelo-ca/data:/var/mariadb
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
   wordpress:
+    build: ./wordpress
     networks:
       - inception-network
     volumes:
       - /home/pmelo-ca/data:/var/wordpress
-
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
 networks:
-  - inception-network
+  inception-network:
