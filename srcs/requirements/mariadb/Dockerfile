@@ -1,5 +1,5 @@
-FROM debian:bullseye
+FROM debian:oldstable
 
 RUN apt-get update && apt-get install -y mariadb-server
 
-CMD [ "mariadb", "--version" ]
+CMD ["mariadb", "--version"]

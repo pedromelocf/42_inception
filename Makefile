@@ -1,4 +1,6 @@
 DOCKER_COMPOSE_PATH := ./srcs/requirements/docker-compose.yml
+DOCKER_RESTART_PATH := ./srcs/requirements/tools/reset_docker_env.sh
+DOCKER_HELP_PATH := ./srcs/requirements/tools/help
 COMPOSE := docker compose -f
 
 all: up
@@ -24,6 +26,9 @@ restart:
 services:
 	$(COMPOSE) $(DOCKER_COMPOSE_PATH) ps
 
+containers:
+	docker ps -a
+
 logs:
 	$(COMPOSE) $(DOCKER_COMPOSE_PATH) logs -f
 
@@ -39,21 +44,10 @@ stopservice:
 restartservice:
 	$(COMPOSE) $(DOCKER_COMPOSE_PATH) restart $(word 2, $(MAKECMDGOALS))
 
-help:
-	@echo "Usage: make [command]"
-	@echo "Available commands:"
-	@echo "  make build          - Builds Docker images without starting the containers."
-	@echo "  make up             - Starts the containers in detached mode (-d)."
-	@echo "  make start          - Starts stopped containers without recreating them."
-	@echo "  make down           - Stops and removes containers, networks, and volumes."
-	@echo "  make stop           - Stops containers without removing them."
-	@echo "  make restart        - Restarts all containers."
-	@echo "  make services       - Lists services and their statuses."
-	@echo "  make logs           - Shows real-time logs of the containers."
-	@echo "  make startservice   - Starts a specific service. Usage: make startservice service_name"
-	@echo "  make downservice    - Stops and removes a specific service. Usage: make downservice service_name"
-	@echo "  make stopservice    - Stops a specific service without removing it. Usage: make stopservice service_name"
-	@echo "  make restartservice - Restarts a specific service. Usage: make restartservice service_name"
-	@echo ""
+resetdocker:
+	@ $(DOCKER_RESTART_PATH)
 
-.PHONY: up build start down stop restart services logs startservice downservice restartservice help
+help:
+	@ cat $(DOCKER_HELP_PATH)
+
+.PHONY: up build start down stop restart services logs startservice startserviceiter downservice restartservice reset_docker help

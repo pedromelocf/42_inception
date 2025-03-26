@@ -1,5 +1,5 @@
-FROM debian:bullseye
+FROM debian:oldstable
 
-RUN apt-get update && apt-get install -y wordpress php-common 
+RUN apt-get update && apt-get install -y php-fpm curl
 
-CMD [ "cat /wp-includes/version.php", "&&", "php", "--version"]
+CMD ["bash", "-c", "while true; do sleep 3600; done"]
