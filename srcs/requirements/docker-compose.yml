@@ -1,21 +1,31 @@
 services:
   nginx:
+    container_name: nginx
+    image: nginx
     build: ./nginx
     networks:
       - inception-network
     ports:
       - "443:443"
-    restart: unless-stopped
+    restart: no
   mariadb:
+    container_name: mariadb
+    image: mariadb
     build: ./mariadb
     networks:
       - inception-network
     volumes:
-      - /home/pmelo-ca/data:/var/mariadb
+      - /home/pmelo-ca/data:/var/lib/mysql
     ports:
       - "3306:3306"
-    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    restart: no
   wordpress:
+    container_name: wordpress
+    image: wordpress
     build: ./wordpress
     networks:
       - inception-network
@@ -23,6 +33,6 @@ services:
       - /home/pmelo-ca/data:/var/wordpress
     ports:
       - "9000:9000"
-    restart: unless-stopped
+    restart: no
 networks:
   inception-network:
