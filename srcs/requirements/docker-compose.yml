@@ -1,3 +1,4 @@
+version: '1.0'
 services:
   nginx:
     container_name: nginx
@@ -15,7 +16,7 @@ services:
     networks:
       - inception-network
     volumes:
-      - /home/pmelo-ca/data:/var/lib/mysql
+      - /home/pmelo-ca/data/mariadb:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
@@ -30,7 +31,7 @@ services:
     networks:
       - inception-network
     volumes:
-      - /home/pmelo-ca/data:/var/wordpress
+      - /home/pmelo-ca/data/wordpress:/var/wordpress
     ports:
       - "9000:9000"
     restart: no

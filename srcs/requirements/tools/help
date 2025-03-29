@@ -13,4 +13,4 @@ Available commands:
   make stopservice    - Stops a specific service without removing it. Usage: make stopservice service_name
   make restartservice - Restarts a specific service. Usage: make restartservice service_name
   make images         - Will show all top level images, their repository and tags, and their size.
-  make reset_docker   - Resets the entire Docker environment. BE AWARE!
+  make resetdocker   - Resets the entire Docker environment. BE AWARE!
