@@ -1,10 +1,10 @@
 FROM debian:oldstable
 
-RUN apt-get update
+RUN apt-get update && apt-get install -y --no-install-recommends php-fpm curl sudo ca-certificates 
 
-#  && apt-get install -y php-fpm
+RUN sudo mkdir -p /srv/www && sudo chown -R www-data: /srv/www
 
-RUN chown -R wp:wp /var/wordpress
+RUN curl https://wordpress.org/latest.tar.gz | sudo -u www-data tar zx -C /srv/www
 
 EXPOSE 9000
 

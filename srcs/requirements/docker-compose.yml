@@ -1,4 +1,3 @@
-version: '1.0'
 services:
   nginx:
     container_name: nginx
@@ -6,24 +5,29 @@ services:
     build: ./nginx
     networks:
       - inception-network
+    volumes:
+      - wordpress-data:/srv/www/wordpress
     ports:
       - "443:443"
-    restart: no
+    restart: on-failure
+    depends_on:
+      - mariadb
+      - wordpress
   mariadb:
     container_name: mariadb
-    image: mariadb
+    image: mariadb  
     build: ./mariadb
     networks:
       - inception-network
     volumes:
-      - /home/pmelo-ca/data/mariadb:/var/lib/mysql
+      - mariadb-data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    restart: no
+    restart: on-failure
   wordpress:
     container_name: wordpress
     image: wordpress
@@ -31,9 +35,30 @@ services:
     networks:
       - inception-network
     volumes:
-      - /home/pmelo-ca/data/wordpress:/var/wordpress
+      - wordpress-data:/srv/www/wordpress
     ports:
       - "9000:9000"
-    restart: no
+    environment:
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_USER=${WORDPRESS_USER}
+      - WORDPRESS_PASSWORD=${WORDPRESS_PASSWORD}
+    restart: on-failure
+    depends_on:
+      - mariadb
+
 networks:
   inception-network:
+
+volumes:
+  wordpress-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/pmelo-ca/data/wordpress
+  mariadb-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/pmelo-ca/data/mariadb
