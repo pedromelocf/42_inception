@@ -1,7 +1,7 @@
 services:
   nginx:
-    container_name: nginx
-    image: nginx
+    container_name: nginx-container
+    image: nginx-image
     build: ./nginx
     networks:
       - inception-network
@@ -14,8 +14,8 @@ services:
       - mariadb
       - wordpress
   mariadb:
-    container_name: mariadb
-    image: mariadb  
+    container_name: mariadb-container
+    image: mariadb-image
     build: ./mariadb
     networks:
       - inception-network
@@ -29,8 +29,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     restart: on-failure
   wordpress:
-    container_name: wordpress
-    image: wordpress
+    container_name: wordpress-container
+    image: wordpress-image
     build: ./wordpress
     networks:
       - inception-network
@@ -39,9 +39,10 @@ services:
     ports:
       - "9000:9000"
     environment:
-      - WORDPRESS_HOST=${WORDPRESS_HOST}
-      - WORDPRESS_USER=${WORDPRESS_USER}
-      - WORDPRESS_PASSWORD=${WORDPRESS_PASSWORD}
+      - WORDPRESS_MYSQL_HOST=${MYSQL_HOST}
+      - WORPRESS_MYSQL_PORT=${MYSQL_PORT}
+      - WORDPRESS_MYSQL_USER=${MYSQL_USER}
+      - WORDPRESS_MYSQL_PASSWORD=${MYSQL_PASSWORD}
     restart: on-failure
     depends_on:
       - mariadb

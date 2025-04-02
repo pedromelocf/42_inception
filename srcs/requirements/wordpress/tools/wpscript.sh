@@ -2,7 +2,7 @@
 
 if [ ! -f /srv/www/wordpress/wp-config.php ]; then
   echo "Generating wp-config.php file. Connecting to mysql database:";
-  wp config create --path=/srv/www/wordpress --dbname=WordPress --dbuser=$WORDPRESS_USER --dbpass=$WORDPRESS_PASSWORD --dbhost=$WORDPRESS_HOST;
+  wp config create --path=/srv/www/wordpress --dbname=WordPress --dbuser=$WORDPRESS_MYSQL_USER --dbpass=$WORDPRESS_MYSQL_PASSWORD --dbhost=$WORDPRESS_MYSQL_HOST;
 
   if [ -f /srv/www/wordpress/wp-config.php ]; then
     echo "wp-config.php generated succefully.";
