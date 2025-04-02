@@ -39,7 +39,7 @@ services:
     ports:
       - "9000:9000"
     environment:
-      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_HOST=${WORDPRESS_HOST}
       - WORDPRESS_USER=${WORDPRESS_USER}
       - WORDPRESS_PASSWORD=${WORDPRESS_PASSWORD}
     restart: on-failure
@@ -48,6 +48,7 @@ services:
 
 networks:
   inception-network:
+    driver: bridge
 
 volumes:
   wordpress-data:

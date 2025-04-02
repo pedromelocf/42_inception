@@ -8,9 +8,10 @@ Available commands:
   make restart        - Restarts all containers.
   make services       - Lists running services and their statuses.
   make logs           - Shows real-time logs of the containers.
-  make startservice   - Starts a specific service. Usage: make startservice service_name
-  make downservice    - Stops and removes a specific service. Usage: make downservice service_name
-  make stopservice    - Stops a specific service without removing it. Usage: make stopservice service_name
-  make restartservice - Restarts a specific service. Usage: make restartservice service_name
+  make startservice   - Starts a specific service. Usage: make startservice <service_name>
+  make downservice    - Stops and removes a specific service. Usage: make downservice <service_name>
+  make stopservice    - Stops a specific service without removing it. Usage: make stopservice <service_name>
+  make restartservice - Restarts a specific service. Usage: make restartservice <service_name>
   make images         - Will show all top level images, their repository and tags, and their size.
-  make resetdocker   - Resets the entire Docker environment. BE AWARE!
+  make resetdocker    - Resets the entire Docker environment. BE AWARE!
+  make iterative      - Run the container ID in iteractive mode. Usage: make iterative <container_id>
