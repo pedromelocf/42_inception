@@ -40,12 +40,31 @@ services:
       - "9000:9000"
     environment:
       - WORDPRESS_MYSQL_HOST=${MYSQL_HOST}
-      - WORPRESS_MYSQL_PORT=${MYSQL_PORT}
       - WORDPRESS_MYSQL_USER=${MYSQL_USER}
       - WORDPRESS_MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - WORDPRESS_USER=${WORDPRESS_USER}
+      - WORDPRESS_PASSWORD=${WORDPRESS_PASSWORD}
+
     restart: on-failure
     depends_on:
       - mariadb
+
+  # adminer:
+  #   container_name: adminer-container
+  #   image: adminer-image
+  #   build: ./bonus/adminer
+  #   networks:
+  #     - inception-network
+  #   ports:
+  #     "8080:8080"
+  #   environment:
+  #     - MYSQL_USER=${MYSQL_USER}
+  #     - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  #     - MYSQL_HOST=${MYSQL_HOST}
+  #     - MYSQL_PORT=${MYSQL_PORT}
+  #   restart: on-failure
+  #   depends_on:
+  #     - mariadb
 
 networks:
   inception-network:

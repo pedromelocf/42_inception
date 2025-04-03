@@ -9,15 +9,14 @@ RUN curl https://wordpress.org/latest.tar.gz | \
     sudo -u www-data tar zx -C /srv/www
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-    sudo chmod +x wp-cli.phar && \
     sudo mv wp-cli.phar /usr/local/bin/wp
 
 COPY ./tools/wpscript.sh /usr/local/bin/wpscript.sh
 
-RUN chmod +x /usr/local/bin/wpscript.sh 
+RUN chmod +x /usr/local/bin/wpscript.sh /usr/local/bin/wp
 
 EXPOSE 9000
 
-CMD ["bash", "-c", "while true; do sleep 3600; done"]
+# CMD ["bash", "-c", "while true; do sleep 3600; done"]
 
-# ENTRYPOINT ["/usr/local/bin/wpscript.sh"]
+ENTRYPOINT ["/usr/local/bin/wpscript.sh"]
