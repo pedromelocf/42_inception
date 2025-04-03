@@ -15,8 +15,4 @@ COPY ./tools/wpscript.sh /usr/local/bin/wpscript.sh
 
 RUN chmod +x /usr/local/bin/wpscript.sh /usr/local/bin/wp
 
-EXPOSE 9000
-
-# CMD ["bash", "-c", "while true; do sleep 3600; done"]
-
 ENTRYPOINT ["/usr/local/bin/wpscript.sh"]

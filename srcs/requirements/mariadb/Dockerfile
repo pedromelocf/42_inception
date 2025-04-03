@@ -10,6 +10,4 @@ COPY ./conf/my.cnf /etc/mysql/my.cnf
 
 RUN chmod +x /usr/local/bin/dbscript.sh /etc/init.d/mariadb
 
-EXPOSE 3306
-
 ENTRYPOINT ["/usr/local/bin/dbscript.sh"]

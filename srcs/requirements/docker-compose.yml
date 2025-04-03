@@ -1,6 +1,6 @@
 services:
   nginx:
-    container_name: nginx-container
+    container_name: nginx
     image: nginx-image
     build: ./nginx
     networks:
@@ -14,30 +14,27 @@ services:
       - mariadb
       - wordpress
   mariadb:
-    container_name: mariadb-container
+    container_name: mariadb
     image: mariadb-image
     build: ./mariadb
     networks:
-      - inception-network
+      inception-network:
+        ipv4_address: 172.18.0.2
     volumes:
       - mariadb-data:/var/lib/mysql
-    ports:
-      - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     restart: on-failure
   wordpress:
-    container_name: wordpress-container
+    container_name: wordpress
     image: wordpress-image
     build: ./wordpress
     networks:
       - inception-network
     volumes:
       - wordpress-data:/srv/www/wordpress
-    ports:
-      - "9000:9000"
     environment:
       - WORDPRESS_MYSQL_HOST=${MYSQL_HOST}
       - WORDPRESS_MYSQL_USER=${MYSQL_USER}
@@ -50,13 +47,11 @@ services:
       - mariadb
 
   # adminer:
-  #   container_name: adminer-container
+  #   container_name: adminer
   #   image: adminer-image
   #   build: ./bonus/adminer
   #   networks:
   #     - inception-network
-  #   ports:
-  #     "8080:8080"
   #   environment:
   #     - MYSQL_USER=${MYSQL_USER}
   #     - MYSQL_PASSWORD=${MYSQL_PASSWORD}
@@ -69,6 +64,9 @@ services:
 networks:
   inception-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
 
 volumes:
   wordpress-data:
