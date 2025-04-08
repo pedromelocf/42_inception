@@ -41,6 +41,8 @@ services:
       - WORDPRESS_MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - WORDPRESS_USER=${WORDPRESS_USER}
       - WORDPRESS_PASSWORD=${WORDPRESS_PASSWORD}
+      - WORDPRESS_EMAIL=${WORDPRESS_EMAIL}
+      - WORDPRESS_URL=${WORDPRESS_URL}
     restart: on-failure
     depends_on:
       - mariadb

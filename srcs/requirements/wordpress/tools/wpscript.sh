@@ -19,7 +19,7 @@ fi
 
 if ! wp core is-installed --allow-root; then
   echo "Installing wp core.";
-  wp core install --url=wpclidemo.dev --title="WP-CLI" --admin_user=$WORDPRESS_USER --admin_password=$WORDPRESS_PASSWORD --admin_email=info@wp-cli.org --allow-root; 
+  wp core install --url=localhost:8080 --title="Pmelo-ca's Inception" --admin_user=$WORDPRESS_USER --admin_password=$WORDPRESS_PASSWORD --admin_email=$WORDPRESS_EMAIL --allow-root; 
 
   if wp core is-installed --allow-root; then
     echo "Wp core installed succefully.";
@@ -36,4 +36,5 @@ wp plugin update --all --allow-root;
 sleep 10;
 
 echo "Starting php-fpm..."
+
 exec /usr/sbin/php-fpm7.4 -F
