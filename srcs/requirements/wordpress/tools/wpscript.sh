@@ -32,3 +32,8 @@ else
 fi
 
 wp plugin update --all --allow-root;
+
+sleep 10;
+
+echo "Starting php-fpm..."
+exec /usr/sbin/php-fpm7.4 -F

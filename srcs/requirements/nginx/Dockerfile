@@ -1,9 +1,13 @@
 FROM debian:oldstable
 
-RUN apt-get update && apt-get install -y nginx nano 
+RUN apt-get update && apt-get install -y nginx 
 
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf 
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 443
+RUN chmod -R 755 /srv/ && chmod +x /etc/nginx/nginx.conf
 
-ENTRYPOINT ["bash", "-c", "while true; do sleep 3600; done"]
+EXPOSE 8080
+
+ENTRYPOINT ["nginx"]
+
+CMD ["-g", "daemon off;"]
