@@ -34,11 +34,12 @@ services:
     image: wordpress-image
     build: ./wordpress
     networks:
-      - inception-network
+      inception-network:
+        ipv4_address: 172.18.0.5
     volumes:
       - wordpress-data:/srv/www/wordpress
     environment:
-      - WORDPRESS_MYSQL_HOST=${MYSQL_HOST}
+      - WORDPRESS_MYSQL_HOST=${MYSQL_HOST}:${MYSQL_PORT}
       - WORDPRESS_MYSQL_USER=${MYSQL_USER}
       - WORDPRESS_MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - WORDPRESS_USER=${WORDPRESS_USER}
