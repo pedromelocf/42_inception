@@ -7,7 +7,7 @@ DATA_DIR_WORDPRESS := /home/pmelo-ca/data/mariadb
 DATA_DIR_MARIADB := /home/pmelo-ca/data/wordpress
 HOSTNAME := pmelo-ca.42.fr
 
-all: stop build up
+all: stop build up changehostname
 
 up: checkdatadir
 	@ $(COMPOSE) $(DOCKER_COMPOSE_PATH) up -d
