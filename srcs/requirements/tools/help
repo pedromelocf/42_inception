@@ -15,3 +15,4 @@ Available commands:
   make images         - Will show all top level images, their repository and tags, and their size.
   make resetdocker    - Resets the entire Docker environment. BE AWARE!
   make iterative      - Run the container ID in iteractive mode. Usage: make iterative <container_id>
+  make changehostname - Replace the hostname from /etc/hosts in address 127.0.0.1 to specified in $HOSTNAME
